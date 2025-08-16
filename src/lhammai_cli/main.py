@@ -2,9 +2,11 @@
 
 import click
 from rich.console import Console
+from rich.markdown import Markdown
+from rich.panel import Panel
 
 from lhammai_cli.settings import settings
-from lhammai_cli.utils import get_llm_response
+from lhammai_cli.utils import draw_panel, get_llm_response
 
 console = Console()
 
@@ -21,10 +23,22 @@ def main(prompt: str, model: str, api_base: str) -> None:
         model (str): The LLM model to use.
         api_base (str): The provider's API base URL.
     """
-    console.print(f"\n✨ You are chatting with [cyan]'{model}'[/cyan] at [cyan]'{api_base}'[/cyan]...")
+    info_message = draw_panel(
+        content=f"You are chatting with [cyan]'{model}'[/cyan] at [cyan]'{api_base}'[/cyan]...",
+        type="info"
+    )
+    console.print(info_message)
 
     response = get_llm_response(prompt, model, api_base)
     if response:
-        console.print(f"\n🤖 LLM response: [green]{response}[/green]")
+        response_panel = draw_panel(
+            content=response,
+            type="assistant"
+        )
+        console.print(response_panel)
     else:
-        console.print(f"\n❌ LLM response: [red]No response received from {model}[/red]")
+        error_panel = draw_panel(
+            content=f"Failed to get a response from the model '{model}'.",
+            type="error"
+        )
+        console.print(error_panel)
