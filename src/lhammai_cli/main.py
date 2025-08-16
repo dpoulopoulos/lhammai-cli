@@ -21,7 +21,8 @@ def main(prompt: str, model: str, api_base: str) -> None:
         model (str): The LLM model to use.
         api_base (str): The provider's API base URL.
     """
-    console.print(f"\n✨ Using model: [cyan]{model}[/cyan]")
+    console.print(f"\n✨ You are chatting with [cyan]'{model}'[/cyan] at [cyan]'{api_base}'[/cyan]...")
+
     response = get_llm_response(prompt, model, api_base)
     if response:
         console.print(f"\n🤖 LLM response: [green]{response}[/green]")

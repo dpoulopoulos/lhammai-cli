@@ -6,6 +6,8 @@ from any_llm import completion
 from any_llm.types.completion import ChatCompletion, ChatCompletionChunk
 from halo import Halo
 
+from .logging import logger
+
 
 def get_llm_response(prompt: str, model: str, api_base: str) -> str | None:
     """Get a response from the LLM.
@@ -23,6 +25,8 @@ def get_llm_response(prompt: str, model: str, api_base: str) -> str | None:
         spinner='dots',
         color='cyan'
     )
+
+    logger.debug(f"Sending prompt to model {model} at {api_base}...")
 
     spinner.start()
     response:  ChatCompletion | Iterator[ChatCompletionChunk] = completion(

@@ -12,5 +12,10 @@ class Settings(BaseSettings):
     """Set application settings."""
     api_base: AnyHttpUrl = Field(validation_alias="API_BASE")
 
+    # logging
+    log_level: str = Field(validation_alias="LOG_LEVEL", default="DEBUG")
+    log_file: str = Field(validation_alias="LOG_FILE", default="app.log")
+    log_retention: str = Field(validation_alias="LOG_RETENTION", default="10 days")
+
 
 settings = Settings()  # type: ignore
