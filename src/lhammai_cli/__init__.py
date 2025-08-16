@@ -1,2 +1,1 @@
-def main() -> None:
-    print("Hello from lhammai-cli!")
+from lhammai_cli.main import main
