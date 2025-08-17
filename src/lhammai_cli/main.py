@@ -1,5 +1,7 @@
 """The main entrypoint of the application."""
 
+from importlib.metadata import version as pkg_version
+
 import click
 from rich.console import Console
 
@@ -45,6 +47,22 @@ def _get_llm_response(messages: ConversationHistory, model: str, api_base: str) 
     return response
 
 
+def show_logo():
+    """Display the Lhammai logo with rich formatting."""
+    try:
+        version = pkg_version("lhammai-cli")
+    except Exception:
+        version = "unknown"
+    
+    logo = f"""
+    ╭───────────────────────────────────────────╮
+    │           🚀 Lhammai v{version}               │
+    │ Interact with any LLM from your terminal. │
+    ╰───────────────────────────────────────────╯
+    """
+    console.print(f"[cyan]{logo}[/cyan]")
+
+
 @click.command
 @click.argument("prompt", required=False)
 @click.option('--interactive', '-i', is_flag=True, help='Run in interactive mode')
@@ -59,18 +77,16 @@ def main(prompt: str, interactive: bool, model: str, api_base: str) -> None:
         model (str): The LLM model to use.
         api_base (str): The provider's API base URL.
     """
-    info_panel = draw_panel(
-        content=f"You are chatting with [cyan]'{model}'[/cyan] at [cyan]'{api_base}'[/cyan]...",
-        type="info"
-    )
-    console.print(info_panel)
+    show_logo()
+
+    console.print(f"✨ You are chatting with [cyan]'{model}'[/cyan] at [cyan]'{api_base}'[/cyan].")
 
     history = ConversationHistory()
     if interactive:
         console.print("💡 [cyan]Interactive[/cyan] mode activated. Type [cyan]'/exit'[/cyan] to end the session.\n")
 
         while True:
-            user_input = console.input("[bold]🙂 You:[/bold] ")
+            user_input = console.input("[bold]🌟 You:[/bold] ")
 
             if user_input.lower() == '/exit':
                 console.print("\n👋 [bold yellow]Thanks for using Lhammai![/bold yellow]")
