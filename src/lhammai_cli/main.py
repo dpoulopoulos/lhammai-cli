@@ -67,7 +67,7 @@ def show_logo(model: str, api_base: str):
 
 
 @click.command
-@click.argument("prompt", required=False)
+@click.option("--prompt", "-p", help="The prompt to send to the LLM")
 @click.option('--interactive', '-i', is_flag=True, help='Run in interactive mode')
 @click.option("--model", "-m", default='ollama/gemma3:4b', help='LLM model to use')
 @click.option("--api-base", default=settings.api_base, help='Host to connect to')
@@ -80,10 +80,10 @@ def main(prompt: str, interactive: bool, model: str, api_base: str) -> None:
         model (str): The LLM model to use.
         api_base (str): The provider's API base URL.
     """
-    show_logo(model, api_base)
-
     history = ConversationHistory()
     if interactive:
+        show_logo(model, api_base)
+
         while True:
             user_input = console.input("[bold]🌟 You:[/bold] ")
 
@@ -104,15 +104,7 @@ def main(prompt: str, interactive: bool, model: str, api_base: str) -> None:
                     type="assistant"
                 )
                 console.print(response_panel)
-    else:
-        if not prompt:
-            error_panel = draw_panel(
-                content="Please provide a prompt or run in interactive mode.",
-                type="error"
-            )
-            console.print(error_panel)
-            return
-
+    elif prompt:
         history.add_message(Role.USER, prompt)
         response = _get_llm_response(history, model, api_base)
 
@@ -122,3 +114,10 @@ def main(prompt: str, interactive: bool, model: str, api_base: str) -> None:
                 type="assistant"
             )
             console.print(response_panel)
+    else:
+        error_panel = draw_panel(
+            content="Please provide a prompt or run in interactive mode. Run `lhammai --help` for more information.",
+            type="error"
+        )
+        console.print(error_panel)
+        return
