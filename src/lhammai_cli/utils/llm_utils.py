@@ -1,9 +1,10 @@
 """Utility functions for interacting with LLMs."""
 
 from collections.abc import Iterator
+from typing import Any
 
 from any_llm import completion
-from any_llm.types.completion import ChatCompletion, ChatCompletionChunk
+from any_llm.types.completion import ChatCompletion, ChatCompletionChunk, ChatCompletionMessage
 from halo import Halo
 from rich.console import Console
 
@@ -12,11 +13,11 @@ from .logging import logger
 console = Console()
 
 
-def get_llm_response(prompt: str, model: str, api_base: str) -> str | None:
+def get_llm_response(messages: list[dict[str, Any] | ChatCompletionMessage], model: str, api_base: str) -> str | None:
     """Get a response from the LLM.
 
     Args:
-        prompt (str): The prompt to send to the LLM.
+        messages (list[dict[str, Any]]): The messages to send to the LLM.
         model (str): The LLM model to use.
         api_base (str): The provider's API base URL.
 
@@ -41,7 +42,7 @@ def get_llm_response(prompt: str, model: str, api_base: str) -> str | None:
     try:
         response:  ChatCompletion | Iterator[ChatCompletionChunk] = completion(
             model=model,
-            messages=[{"role": "user", "content": prompt}],
+            messages=messages,
             api_base=api_base
         )
     except ConnectionError as e:
