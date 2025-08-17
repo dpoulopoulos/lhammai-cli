@@ -2,8 +2,6 @@
 
 import click
 from rich.console import Console
-from rich.markdown import Markdown
-from rich.panel import Panel
 
 from lhammai_cli.settings import settings
 from lhammai_cli.utils import draw_panel, get_llm_response
@@ -23,22 +21,42 @@ def main(prompt: str, model: str, api_base: str) -> None:
         model (str): The LLM model to use.
         api_base (str): The provider's API base URL.
     """
+    provider, _ = model.split('/')
+
     info_message = draw_panel(
         content=f"You are chatting with [cyan]'{model}'[/cyan] at [cyan]'{api_base}'[/cyan]...",
         type="info"
     )
     console.print(info_message)
 
-    response = get_llm_response(prompt, model, api_base)
+    try:
+        response = get_llm_response(prompt, model, api_base)
+    except ConnectionError:
+        error_panel = draw_panel(
+            content=f"Failed to connect to [red]{provider.capitalize()}[/red] at [red]{api_base}[/red]. "
+                     "Please check your settings.",
+            type="error"
+        )
+        console.print(error_panel)
+        return
+    except NotImplementedError:
+        error_panel = draw_panel(
+            content="Streaming responses are not supported yet.",
+            type="error"
+        )
+        console.print(error_panel)
+        return
+    except Exception as e:
+        error_panel = draw_panel(
+            content=f"An unexpected error occurred: {e}",
+            type="error"
+        )
+        console.print(error_panel)
+        return
+
     if response:
         response_panel = draw_panel(
             content=response,
             type="assistant"
         )
         console.print(response_panel)
-    else:
-        error_panel = draw_panel(
-            content=f"Failed to get a response from the model '{model}'.",
-            type="error"
-        )
-        console.print(error_panel)

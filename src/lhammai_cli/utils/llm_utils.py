@@ -5,8 +5,11 @@ from collections.abc import Iterator
 from any_llm import completion
 from any_llm.types.completion import ChatCompletion, ChatCompletionChunk
 from halo import Halo
+from rich.console import Console
 
 from .logging import logger
+
+console = Console()
 
 
 def get_llm_response(prompt: str, model: str, api_base: str) -> str | None:
@@ -19,7 +22,13 @@ def get_llm_response(prompt: str, model: str, api_base: str) -> str | None:
 
     Returns:
         str: The LLM's response.
+
+    Raises:
+        ConnectionError: If the connection to the LLM fails.
+        NotImplementedError: For streaming responses.
     """
+    provider, _ = model.split('/')
+
     spinner = Halo(
         text='🤖 Thinking...',
         spinner='dots',
@@ -29,16 +38,27 @@ def get_llm_response(prompt: str, model: str, api_base: str) -> str | None:
     logger.debug(f"Sending prompt to model {model} at {api_base}...")
 
     spinner.start()
-    response:  ChatCompletion | Iterator[ChatCompletionChunk] = completion(
-        model=model,
-        messages=[{"role": "user", "content": prompt}],
-        api_base=api_base
-    )
-    spinner.stop()
+    try:
+        response:  ChatCompletion | Iterator[ChatCompletionChunk] = completion(
+            model=model,
+            messages=[{"role": "user", "content": prompt}],
+            api_base=api_base
+        )
+    except ConnectionError as e:
+        spinner.stop()
+        logger.error(f"Failed to connect to {provider.capitalize()} - {e}")
+        raise
+    except Exception as e:
+        spinner.stop()
+        logger.error(f"An error occurred while communicating with {provider.capitalize()}: {e}")
+        raise
 
     if isinstance(response, ChatCompletion):
+        spinner.stop()
         return response.choices[0].message.content
     else:
+        spinner.stop()
+        logger.error("Streaming responses are not supported yet.")
         raise NotImplementedError(
             "Streaming responses are not supported yet."
         )
