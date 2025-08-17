@@ -47,7 +47,7 @@ def _get_llm_response(messages: ConversationHistory, model: str, api_base: str) 
     return response
 
 
-def show_logo():
+def show_logo(model: str, api_base: str):
     """Display the Lhammai logo with rich formatting."""
     try:
         version = pkg_version("lhammai-cli")
@@ -61,6 +61,9 @@ def show_logo():
     ╰───────────────────────────────────────────╯
     """
     console.print(f"[cyan]{logo}[/cyan]")
+    console.print("💡 [cyan]Interactive[/cyan] mode activated. Type [cyan]'/exit'[/cyan] to end the session.")
+    console.print("🧹 Type [cyan]'/clear'[/cyan] to clear the screen.")
+    console.print(f"✨ You are chatting with [cyan]'{model}'[/cyan] at [cyan]'{api_base}'[/cyan].\n")
 
 
 @click.command
@@ -77,20 +80,20 @@ def main(prompt: str, interactive: bool, model: str, api_base: str) -> None:
         model (str): The LLM model to use.
         api_base (str): The provider's API base URL.
     """
-    show_logo()
-
-    console.print(f"✨ You are chatting with [cyan]'{model}'[/cyan] at [cyan]'{api_base}'[/cyan].")
+    show_logo(model, api_base)
 
     history = ConversationHistory()
     if interactive:
-        console.print("💡 [cyan]Interactive[/cyan] mode activated. Type [cyan]'/exit'[/cyan] to end the session.\n")
-
         while True:
             user_input = console.input("[bold]🌟 You:[/bold] ")
 
             if user_input.lower() == '/exit':
                 console.print("\n👋 [bold yellow]Thanks for using Lhammai![/bold yellow]")
                 break
+            elif user_input.lower() == '/clear':
+                console.clear()
+                show_logo(model, api_base)
+                continue
 
             history.add_message(Role.USER, user_input)
             response = _get_llm_response(history, model, api_base)
