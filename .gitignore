@@ -11,3 +11,6 @@ wheels/
 
 # log files
 *.log
+
+# test artifacts
+.coverage
