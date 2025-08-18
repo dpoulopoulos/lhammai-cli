@@ -7,7 +7,14 @@ authors = [
     { name = "Dimitris Poulopoulos", email = "dimitris.a.poulopoulos@gmail.com" }
 ]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "click>=8.2.1",
+    "dotenv>=0.9.9",
+    "halo>=0.0.31",
+    "loguru>=0.7.3",
+    "pydantic-settings>=2.10.1",
+    "rich>=14.1.0",
+]
 
 [project.scripts]
 lhammai = "lhammai_cli:main"
@@ -18,7 +25,12 @@ build-backend = "uv_build"
 
 [dependency-groups]
 dev = [
+    { include-group="ollama" },
     "commitizen>=4.8.3",
+]
+
+ollama = [
+    "any-llm-sdk[ollama]>=0.13.1",
 ]
 
 [tool.commitizen]
