@@ -23,6 +23,10 @@ Powered by the [`any-llm`](https://mozilla-ai.github.io/any-llm/) library, it se
 providers, including OpenAI, Anthropic, and local servers such as Ollama, llamafile, and others. For a full list of
 supported providers, see the official [any-llm documentation](https://mozilla-ai.github.io/any-llm/providers/).
 
+The name Lhammai comes from "[Lhammas](https://en.wikipedia.org/wiki/Lhammas),"
+[Noldorin](https://en.wikipedia.org/wiki/Sindarin#Creation) for "account of tongues", a work of fictional
+sociolinguistics, written by J. R. R. Tolkien in 1937.
+
 ## Getting Started
 
 ### Prerequisites
