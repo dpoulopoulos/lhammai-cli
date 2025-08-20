@@ -2,7 +2,7 @@
 name = "lhammai-cli"
 version = "0.1.0a0"
 description = "Interact with any LLM from your terminal"
-readme = "README.md"
+readme = "docs/PYPI_README.md"
 authors = [
     { name = "Dimitris Poulopoulos", email = "dimitris.a.poulopoulos@gmail.com" }
 ]
@@ -15,6 +15,10 @@ dependencies = [
     "pydantic-settings>=2.10.1",
     "rich>=14.1.0",
 ]
+
+[project.urls]
+Source = "https://github.com/dpoulopoulos/lhammai-cli"
+Issues = "https://github.com/dpoulopoulos/lhammai-cli/issues"
 
 [project.scripts]
 lhammai = "lhammai_cli:main"
