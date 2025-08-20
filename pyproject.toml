@@ -1,6 +1,6 @@
 [project]
 name = "lhammai-cli"
-version = "0.0.1"
+version = "0.1.0a0"
 description = "Interact with any LLM from your terminal"
 readme = "README.md"
 authors = [
