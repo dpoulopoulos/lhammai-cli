@@ -1,7 +1,7 @@
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/images/lhammai-cli-white.svg">
-    <img alt="Lhammai CLI logo" src="assets/images/lhammai-cli-black.svg" width="50%">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/dpoulopoulos/lhammai-cli/refs/heads/main/assets/images/lhammai-cli-white.svg?token=GHSAT0AAAAAADHKCRBPHYXDDK3LHQI62HUA2FFUASA">
+    <img alt="Lhammai CLI logo" src="https://raw.githubusercontent.com/dpoulopoulos/lhammai-cli/refs/heads/main/assets/images/lhammai-cli-black.svg?token=GHSAT0AAAAAADHKCRBOELMAO26VDKPVKQ2Y2FFT6FA" width="50%">
   </picture>
 </div>
 
