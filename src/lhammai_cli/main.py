@@ -42,5 +42,5 @@ def main(prompt: str | None, model: str, api_base: str) -> None:
             console.print(response_panel)
         else:
             console.print(f"\n❌ LLM response: [red]No response received from {model}[/red]")
-    except (ConnectionError, RuntimeError, Exception) as e:
+    except Exception as e:
         console.print(f"\n❌ An error occurred: [red]{e}[/red]")
