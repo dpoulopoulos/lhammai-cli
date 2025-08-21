@@ -59,7 +59,6 @@ sociolinguistics, written by J. R. R. Tolkien in 1937.
 
 To begin, you'll need to run the Ollama server. For this example, you can use Docker for a quick setup.
 
-
 > [!WARNING]
 > This approach has some limitations, especially on a Mac. Since Docker Desktop doesn't support GPUs, it's better to run
 > Ollama as a standalone application if you're using a Mac. For more detailed instructions, check the official
@@ -92,6 +91,12 @@ To begin, you'll need to run the Ollama server. For this example, you can use Do
 > [!TIP]
 > Configure your application by creating a `.env` file in the root directory and adding your options:
 > `cp .default.env .env`
+
+You can also pipe content to `lhammai` from standard input. This is useful for analyzing logs, summarizing files, etc.:
+
+```bash
+cat dev.log | lhammai -p "explain:"
+```
 
 # License
 
