@@ -1,3 +1,5 @@
+import sys
+
 import click
 from rich.console import Console
 from rich.markdown import Markdown
@@ -10,22 +12,32 @@ console = Console()
 
 
 @click.command
-@click.argument("prompt", required=True)
-@click.option("--model", "-m", default=settings.model, help='LLM model to use')
-@click.option("--api-base", default=settings.api_base, help='Host to connect to')
-def main(prompt: str, model: str, api_base: str) -> None:
+@click.option("--prompt", "-p", help="Prompt to send to the LLM")
+@click.option("--model", "-m", default=settings.model, help="LLM model to use")
+@click.option("--api-base", default=settings.api_base, help="Host to connect to")
+def main(prompt: str | None, model: str, api_base: str) -> None:
     """Interact with any LLM."""
+    stdin_content = ""
+    if not sys.stdin.isatty():
+        stdin_content = sys.stdin.read().strip()
+
+    if stdin_content and prompt:
+        final_prompt = f"{prompt} {stdin_content}"
+    elif stdin_content:
+        final_prompt = stdin_content
+    elif prompt:
+        final_prompt = prompt
+    else:
+        console.print("\n❌ Error: [red]No input provided. Use -p/--prompt option or pipe content to stdin[/red]")
+        sys.exit(1)
+
     console.print(f"\n✨ Connected to [cyan]'{model}'[/cyan] at [cyan]'{api_base}'[/cyan]\n")
 
     try:
-        response = get_llm_response(prompt, model, api_base)
+        response = get_llm_response(final_prompt, model, api_base)
         if response:
             response_panel = Panel(
-                Markdown(response),
-                title="🤖 Assistant",
-                title_align="left",
-                border_style="cyan",
-                padding=(1, 1)
+                Markdown(response), title="🤖 Assistant", title_align="left", border_style="cyan", padding=(1, 1)
             )
             console.print(response_panel)
         else:
