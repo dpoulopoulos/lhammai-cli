@@ -51,7 +51,7 @@ jobs:
 
   publish-to-pypi:
     name: Publish to PyPI
-    needs: publish-to-testpypi
+    needs: build
     runs-on: ubuntu-latest
     environment: pypi-release
     permissions:
