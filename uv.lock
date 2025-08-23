@@ -379,7 +379,7 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "click", specifier = ">=8.1.7" },
+    { name = "click", specifier = ">=8.2.1" },
     { name = "dotenv", specifier = ">=0.9.9" },
     { name = "halo", specifier = ">=0.0.31" },
     { name = "loguru", specifier = ">=0.7.3" },
