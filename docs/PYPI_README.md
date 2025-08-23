@@ -90,6 +90,12 @@ To begin, you'll need to run the Ollama server. For this example, you can use Do
 > Configure your application by creating a `.env` file in the root directory and adding your options:
 > `cp .default.env .env`
 
+You can also pipe content to `lhammai` from standard input. This is useful for analyzing logs, summarizing files, etc.:
+
+```console
+cat dev.log | lhammai -p "explain:"
+```
+
 # License
 
 See the [LICENSE](LICENSE) file for details.
