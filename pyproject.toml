@@ -1,6 +1,6 @@
 [project]
 name = "lhammai-cli"
-version = "0.1.0a7"
+version = "0.1.0a8"
 description = "Interact with any LLM from your terminal"
 readme = "docs/PYPI_README.md"
 authors = [

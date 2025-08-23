@@ -1,3 +1,9 @@
+## 0.1.0a8 (2025-08-24)
+
+### Fix
+
+- **pyproject**: move ollama to optional dependencies
+
 ## 0.1.0a7 (2025-08-24)
 
 ### Fix
