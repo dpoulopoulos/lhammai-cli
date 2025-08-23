@@ -37,18 +37,18 @@ sociolinguistics, written by J. R. R. Tolkien in 1937.
 ### Installation
 
 1. Clone the repository and navigate to the source directory:
-   ```bash
+   ```console
    git clone https://github.com/dpoulopoulos/lhammai-cli.git && cd lhammai-cli
    ```
 
 2. Install the dependencies using `uv`:
-   ```bash
+   ```console
    uv sync --group ollama
    ```
 
 3. Activate the virtual environment:
 
-   ```bash
+   ```console
    source .venv/bin/activate
    ```
 
@@ -66,24 +66,24 @@ To begin, you'll need to run the Ollama server. For this example, you can use Do
 1. Run the following command to start the Ollama server in a Docker container:
 
     a. CPU only:
-    ```bash
+    ```console
     docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
     ```
 
     b. Nvidia GPU:
-    ```bash
+    ```console
     docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
     ```
 
 2. Run a model:
 
-    ```bash
+    ```console
     docker exec -it ollama ollama run gemma3:4b
     ```
 
 3. Interact with the model:
 
-    ```bash
+    ```console
     lhammai Hello!
     ```
 
