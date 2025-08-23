@@ -1,3 +1,9 @@
+## 0.1.0a6 (2025-08-24)
+
+### Fix
+
+- **pyproject**: fix click dependency
+
 ## 0.1.0a5 (2025-08-23)
 
 ### Feat
