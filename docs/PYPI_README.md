@@ -11,6 +11,7 @@
 
 [![License](https://img.shields.io/badge/license-apache%202.0-blue)](#license)
 [![Tests](https://github.com/dpoulopoulos/lhammai-cli/actions/workflows/test.yml/badge.svg)](https://github.com/dpoulopoulos/lhammai-cli/actions/workflows/test.yml)
+[![Publish to PyPI](https://github.com/dpoulopoulos/lhammai-cli/actions/workflows/release.yml/badge.svg)](https://github.com/dpoulopoulos/lhammai-cli/actions/workflows/release.yml)
 
 </div>
 
