@@ -37,6 +37,16 @@ sociolinguistics, written by J. R. R. Tolkien in 1937.
 
 ### Installation
 
+#### From PyPI
+
+You can install the package from PyPI using pip (recommended):
+
+```console
+pip install "lhammai-cli[ollama]"
+```
+
+#### From Source
+
 1. Clone the repository and navigate to the source directory:
    ```console
    git clone https://github.com/dpoulopoulos/lhammai-cli.git && cd lhammai-cli

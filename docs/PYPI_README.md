@@ -37,6 +37,16 @@ sociolinguistics, written by J. R. R. Tolkien in 1937.
 
 ### Installation
 
+#### From PyPI
+
+You can install the package from PyPI using pip (recommended):
+
+```console
+pip install "lhammai-cli[ollama]"
+```
+
+#### From Source
+
 1. Clone the repository and navigate to the source directory:
    ```console
    git clone https://github.com/dpoulopoulos/lhammai-cli.git && cd lhammai-cli
@@ -58,7 +68,6 @@ sociolinguistics, written by J. R. R. Tolkien in 1937.
 ### Usage
 
 To begin, you'll need to run the Ollama server. For this example, you can use Docker for a quick setup.
-
 
 > This approach has some limitations, especially on a Mac. Since Docker Desktop doesn't support GPUs, it's better to run
 > Ollama as a standalone application if you're using a Mac. For more detailed instructions, check the official
