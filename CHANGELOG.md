@@ -1,3 +1,9 @@
+## 0.1.0a9 (2025-08-24)
+
+### Fix
+
+- **default.env**: change the provider/model syntax
+
 ## 0.1.0a8 (2025-08-24)
 
 ### Fix
