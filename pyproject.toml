@@ -29,7 +29,7 @@ build-backend = "uv_build"
 
 [project.optional-dependencies]
 ollama = [
-    "any-llm-sdk[ollama]>=0.13.1",
+    "any-llm-sdk[ollama]>=0.16.0",
 ]
 
 [dependency-groups]

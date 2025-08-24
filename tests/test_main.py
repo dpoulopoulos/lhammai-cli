@@ -16,7 +16,7 @@ def test_main_with_prompt_option():
 
     assert result.exit_code == 0
     assert return_value in result.output
-    mock_get.assert_called_once_with(prompt, "ollama/gemma3:4b", "http://localhost:11434/")
+    mock_get.assert_called_once_with(prompt, "ollama:gemma3:4b", "http://localhost:11434/")
 
 
 def test_main_with_stdin_input():
@@ -30,7 +30,7 @@ def test_main_with_stdin_input():
 
     assert result.exit_code == 0
     assert return_value in result.output
-    mock_get.assert_called_once_with(stdin_content, "ollama/gemma3:4b", "http://localhost:11434/")
+    mock_get.assert_called_once_with(stdin_content, "ollama:gemma3:4b", "http://localhost:11434/")
 
 
 def test_main_with_stdin_and_prompt():
@@ -45,7 +45,7 @@ def test_main_with_stdin_and_prompt():
 
     assert result.exit_code == 0
     assert return_value in result.output
-    mock_get.assert_called_once_with(f"{prompt} {stdin_content}", "ollama/gemma3:4b", "http://localhost:11434/")
+    mock_get.assert_called_once_with(f"{prompt} {stdin_content}", "ollama:gemma3:4b", "http://localhost:11434/")
 
 
 def test_main_no_input_provided():

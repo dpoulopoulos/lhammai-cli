@@ -12,7 +12,7 @@ def test_get_llm_response_success(mock_llm_response: ChatCompletion) -> None:
     with patch("lhammai_cli.utils.llm_utils.completion") as mock_completion:
         mock_completion.return_value = mock_llm_response
 
-        model = "ollama/test_model"
+        model = "ollama:test_model"
         api_base = "http://localhost:11434"
         prompt = "Hello!"
 
@@ -29,7 +29,7 @@ def test_get_llm_response_success(mock_llm_response: ChatCompletion) -> None:
 def test_get_llm_response_connection_error() -> None:
     """Test connection error when communicating with the LLM."""
     with patch("lhammai_cli.utils.llm_utils.completion", side_effect=ConnectionError("Test error")) as mock_completion:
-        model = "ollama/test_model"
+        model = "ollama:test_model"
         api_base = "http://localhost:11434"
         prompt = "Hello!"
 
@@ -49,7 +49,7 @@ def test_get_llm_response_streaming_not_implemented() -> None:
         "lhammai_cli.utils.llm_utils.completion",
         side_effect=ResponseError("model \"test_model\" not found, try pulling it first (status code: 404)")
     ) as mock_completion:
-        model = "ollama/test_model"
+        model = "ollama:test_model"
         api_base = "http://localhost:11434"
         prompt = "Hello!"
 
@@ -68,7 +68,7 @@ def test_get_llm_response_invalid_response() -> None:
     with patch("lhammai_cli.utils.llm_utils.completion") as mock_completion:
         mock_completion.return_value = MagicMock()
 
-        model = "ollama/test_model"
+        model = "ollama:test_model"
         api_base = "http://localhost:11434"
         prompt = "Hello!"
 

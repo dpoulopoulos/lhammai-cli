@@ -13,7 +13,7 @@ wheels = [
 
 [[package]]
 name = "any-llm-sdk"
-version = "0.13.1"
+version = "0.16.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "httpx" },
@@ -22,9 +22,9 @@ dependencies = [
     { name = "rich" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/21/a7/1a5f94ccff14efcc6ca2930e1934e369144b894ab89b8a0c80f68950238c/any_llm_sdk-0.13.1.tar.gz", hash = "sha256:9d09eb40c20ed3d2be199d34f2b43b58bfc5ddb2eacb95e8d80193a444ca8871", size = 204897, upload-time = "2025-08-15T14:04:48.291Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/c5/af/7c9d11a4590deb3614aa4a2b28bc03bc39673c694359ab38dcfd60695a5a/any_llm_sdk-0.16.0.tar.gz", hash = "sha256:3bad38cb523f55c42618bc259e317f9334835dd9ca117c8680ed2efd1ae87067", size = 1164144, upload-time = "2025-08-22T19:12:54.163Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f6/6c/7c6c00097b84aa6ae33ed3ccc17b2a9adc72c5e3352e74e91e7519a0a04c/any_llm_sdk-0.13.1-py3-none-any.whl", hash = "sha256:b729614cc63c2be0c26cef1361a400765b1d9e4ed1971a3f5fcd884cd0612e93", size = 89121, upload-time = "2025-08-15T14:04:46.692Z" },
+    { url = "https://files.pythonhosted.org/packages/6d/01/ec21a4c48f172033a2f0ca66856b9625a60313d0e45559be99e9be15b4ae/any_llm_sdk-0.16.0-py3-none-any.whl", hash = "sha256:194ca63850901d02c9acf194efc1841684038cbb4ed5016eedbfc0760b65ebff", size = 99724, upload-time = "2025-08-22T19:12:52.611Z" },
 ]
 
 [package.optional-dependencies]
@@ -380,7 +380,7 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "any-llm-sdk", extras = ["ollama"], marker = "extra == 'ollama'", specifier = ">=0.13.1" },
+    { name = "any-llm-sdk", extras = ["ollama"], marker = "extra == 'ollama'", specifier = ">=0.16.0" },
     { name = "click", specifier = ">=8.2.1" },
     { name = "dotenv", specifier = ">=0.9.9" },
     { name = "halo", specifier = ">=0.0.31" },

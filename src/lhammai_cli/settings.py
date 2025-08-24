@@ -24,7 +24,7 @@ class Settings(BaseSettings):
     def validate_model(cls, v: str) -> str:
         """Validate that the model follows the expected format.
 
-        Check that the model string is in the format '<provider>/<model>'
+        Check that the model string is in the format '<provider>:<model>'
         and that the provider is in the `SUPPORTED_PROVIDERS` list.
         """
         try:
