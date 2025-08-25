@@ -36,6 +36,7 @@ ollama = [
 dev = [
     { include-group="test" },
     "commitizen>=4.8.3",
+    "ruff>=0.12.10",
 ]
 
 test = [
