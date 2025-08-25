@@ -1,3 +1,5 @@
+import os
+
 from any_llm.exceptions import UnsupportedProviderError
 from any_llm.provider import ProviderFactory
 from dotenv import find_dotenv, load_dotenv
@@ -7,12 +9,15 @@ from pydantic_settings import BaseSettings
 load_dotenv(find_dotenv(".default.env", usecwd=True))
 load_dotenv(find_dotenv(".env", usecwd=True), override=True)
 
+DEFAULT_MODEL = os.getenv("MODEL", "ollama:gemma3:4b")
+DEFAULT_API_BASE = os.getenv("API_BASE", "http://localhost:11434")
+
 
 class Settings(BaseSettings):
     """Set application settings."""
     # LLM settings
-    model: str = Field(validation_alias="MODEL")
-    api_base: AnyHttpUrl = Field(validation_alias="API_BASE")
+    model: str = Field(validation_alias="MODEL", default=DEFAULT_MODEL)
+    api_base: str = Field(validation_alias="API_BASE", default=DEFAULT_API_BASE)
 
     # logging
     log_level: str = Field(validation_alias="LOG_LEVEL", default="DEBUG")
@@ -35,6 +40,13 @@ class Settings(BaseSettings):
             raise
 
         return v
+
+    @field_validator("api_base")
+    @classmethod
+    def validate_api_base(cls, v: str) -> AnyHttpUrl:
+        """Convert API base URL string to AnyHttpUrl."""
+        from pydantic import AnyHttpUrl
+        return AnyHttpUrl(v)
 
 
 settings = Settings()  # type: ignore
