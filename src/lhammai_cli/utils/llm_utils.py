@@ -29,19 +29,13 @@ def get_llm_response(prompt: str, model: str, api_base: str) -> str | None:
     """
     provider, _ = ProviderFactory.split_model_provider(model)
 
-    spinner = Halo(
-        text='🤖 Thinking...',
-        spinner='dots',
-        color='cyan'
-    )
+    spinner = Halo(text="🤖 Thinking...", spinner="dots", color="cyan")
 
     spinner.start()
 
     try:
-        response:  ChatCompletion | Iterator[ChatCompletionChunk] = completion(
-            model=model,
-            messages=[{"role": "user", "content": prompt}],
-            api_base=api_base
+        response: ChatCompletion | Iterator[ChatCompletionChunk] = completion(
+            model=model, messages=[{"role": "user", "content": prompt}], api_base=api_base
         )
     except ConnectionError as e:
         spinner.stop()
