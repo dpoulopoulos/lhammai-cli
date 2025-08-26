@@ -5,6 +5,8 @@ from rich.console import Console
 from rich.markdown import Markdown
 from rich.panel import Panel
 
+from lhammai_cli.history import ConversationHistory
+from lhammai_cli.schema import Role
 from lhammai_cli.settings import settings
 from lhammai_cli.utils import get_llm_response
 
@@ -33,9 +35,15 @@ def main(prompt: str | None, model: str, api_base: str) -> None:
 
     console.print(f"\n✨ Connected to [cyan]'{model}'[/cyan] at [cyan]'{api_base}'[/cyan]\n")
 
+    # Initialize conversation history
+    history = ConversationHistory.start_new(model, api_base)
     try:
+        history.add_message(Role.USER, final_prompt)
         response = get_llm_response(final_prompt, model, api_base)
         if response:
+            history.add_message(Role.ASSISTANT, response)
+            history.save_to_disk()
+
             response_panel = Panel(
                 Markdown(response), title="🤖 Assistant", title_align="left", border_style="cyan", padding=(1, 1)
             )
