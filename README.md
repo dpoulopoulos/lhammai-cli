@@ -37,8 +37,6 @@ sociolinguistics, written by J. R. R. Tolkien in 1937.
 
 ### Installation
 
-#### From PyPI
-
 You can install the package from PyPI using pip (recommended):
 
 ```console
