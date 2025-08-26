@@ -1,3 +1,14 @@
+## 0.1.0a10 (2025-08-26)
+
+### Feat
+
+- **main**: integrate conversation history
+- **history**: add conversation history
+
+### Fix
+
+- **settings**: provide sensible defaults
+
 ## 0.1.0a9 (2025-08-24)
 
 ### Fix

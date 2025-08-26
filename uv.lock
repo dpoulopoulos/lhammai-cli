@@ -349,7 +349,7 @@ wheels = [
 
 [[package]]
 name = "lhammai-cli"
-version = "0.1.0a9"
+version = "0.1.0a10"
 source = { editable = "." }
 dependencies = [
     { name = "click" },
