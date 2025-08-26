@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 from any_llm.exceptions import UnsupportedProviderError
 from any_llm.provider import ProviderFactory
@@ -15,6 +16,7 @@ DEFAULT_API_BASE = os.getenv("API_BASE", "http://localhost:11434")
 
 class Settings(BaseSettings):
     """Set application settings."""
+
     # LLM settings
     model: str = Field(validation_alias="MODEL", default=DEFAULT_MODEL)
     api_base: str = Field(validation_alias="API_BASE", default=DEFAULT_API_BASE)
@@ -23,6 +25,9 @@ class Settings(BaseSettings):
     log_level: str = Field(validation_alias="LOG_LEVEL", default="DEBUG")
     log_file: str = Field(validation_alias="LOG_FILE", default="app.log")
     log_retention: str = Field(validation_alias="LOG_RETENTION", default="10 days")
+
+    # conversation history
+    history_file: Path = Field(validation_alias="HISTORY_FILE", default=Path("~/.lhammai/history.json").expanduser())
 
     @field_validator("model")
     @classmethod
@@ -45,7 +50,6 @@ class Settings(BaseSettings):
     @classmethod
     def validate_api_base(cls, v: str) -> AnyHttpUrl:
         """Convert API base URL string to AnyHttpUrl."""
-        from pydantic import AnyHttpUrl
         return AnyHttpUrl(v)
 
 
